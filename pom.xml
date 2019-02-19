@@ -53,39 +53,6 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>copy-dependencies</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>
-								${project.build.directory}/libs
-							</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>${project.build.directory}/libs/</classpathPrefix>
-							<mainClass>
-								minesweeper.Main
-							</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-			<plugin>
 		        <artifactId>maven-assembly-plugin</artifactId>
 		        <version>3.1.1</version>
 		        <configuration>
@@ -104,6 +71,14 @@
 		        </executions>
 		      </plugin>
 		</plugins>
+		<resources>
+	     <resource>
+	       <directory>data</directory>
+	       <includes>
+	       	<include>*</include>      	
+	       </includes>
+	     </resource>
+	   </resources>	
 	</build>
 
 </project>

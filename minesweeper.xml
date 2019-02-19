@@ -5,7 +5,7 @@
     <target name="create_run_jar">
         <jar destfile="${dir.jarfile}/target/minesweeper_run.jar" filesetmanifest="mergewithoutmain">
             <manifest>
-                <attribute name="Main-Class" value="minesweeper.Main"/>
+                <attribute name="Main-Class" value="minesweeper.main.Gui"/>
                 <attribute name="Class-Path" value="."/>
             </manifest>
 	    <fileset dir="${dir.jarfile}/target/classes"/>

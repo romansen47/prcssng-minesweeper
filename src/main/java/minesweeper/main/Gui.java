@@ -14,6 +14,29 @@ import processing.event.MouseEvent;
 
 public class Gui extends processing.template.Gui implements IGui {
 
+	
+	final static String mainclass = "minesweeper.main.Gui";
+	final static String path ="";
+	public static String[] Pics;
+	
+	public static void main(String[] args) {
+
+		Pics = new String[1];
+		{
+			Pics[0] = "rb.png";
+		}
+
+		// Random r=new Random();
+		Constants.dataString = Pics[0]; // [6]; //
+
+		Constants.intensity = 60;
+		Gui.setSIZE(80);
+		// System.out.println("hi");
+
+		(new Gui()).run(mainclass);
+
+	}
+	
 	/**
 	 * static Game class
 	 */
