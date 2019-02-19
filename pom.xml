@@ -39,14 +39,14 @@
 			<artifactId>math</artifactId>
 			<version>1.0.0-snapshot</version>
 			<type>jar</type>
-			<scope>provided</scope>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>prcssng</groupId>
 			<artifactId>template</artifactId>
 			<version>1.0.0-snapshot</version>
 			<type>jar</type>
-			<scope>provided</scope>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 
