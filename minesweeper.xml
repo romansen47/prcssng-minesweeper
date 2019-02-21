@@ -11,7 +11,7 @@
 	    <fileset dir="${dir.jarfile}/target/classes"/>
             <zipfileset excludes="META-INF/*.SF" src="../prcssng-template/target/template-1.0.0-snapshot.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="../math/target/math-1.0.0-snapshot.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="target/minesweeper-1.0.0-SNAPSHOT-jar-with-dependencies.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="target/minesweeper-1.0.0-snapshot-jar-with-dependencies.jar"/>
         </jar>
     </target>
 </project>
