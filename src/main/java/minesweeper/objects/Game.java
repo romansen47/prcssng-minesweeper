@@ -125,7 +125,7 @@ public class Game implements IDrawable {
 				return "won the match";
 			}
 		}
-		Constants.Sgst = gui.Match.RandomOpenCell(gui);
+		Constants.Sgst = gui.getGame().RandomOpenCell(gui);
 		return ans;
 	}
 
@@ -149,93 +149,13 @@ public class Game implements IDrawable {
 			}
 		}
 		IGui.setSurrBombsAll(this);
-
 	}
 
 	@Override
 	public void draw(Gui gui) {
-		for (int m = 0; m < gui.Match.match.length; m++) {
-			for (int n = 0; n < gui.Match.match[0].length; n++) {
-				if (getMatch()[m][n].isOpen()) {
-					gui.fill(255);
-					gui.triangle(gui.getXCoordinates(n), gui.getYCoordinates(m), gui.getXCoordinates(n),
-							gui.getYCoordinates(m) + Constants.CellSize * gui.zoom,
-							gui.getXCoordinates(n) + Constants.CellSize * gui.zoom, gui.getYCoordinates(m));
-					gui.fill(100);
-					gui.triangle(gui.getXCoordinates(n) + Constants.CellSize * gui.zoom,
-							gui.getYCoordinates(m) + Constants.CellSize * gui.zoom, gui.getXCoordinates(n),
-							gui.getYCoordinates(m) + Constants.CellSize * gui.zoom,
-							gui.getXCoordinates(n) + Constants.CellSize * gui.zoom, gui.getYCoordinates(m));
-					if (getMatch()[m][n].isMarkedAsBomb()) {
-						gui.fill(255, 0, 0);
-					} else {
-						gui.fill(180);
-						if (m == Constants.Sgst[0] && n == Constants.Sgst[1]) {
-							if (gui.millis() - Constants.deLay > 6000
-									&& (gui.millis() - Constants.deLay) % 1000 < 500) {
-								gui.fill(0, 255, 0);
-							}
-						}
-					}
-					gui.rect(gui.getXCoordinates(n) + (int) (Constants.Stuck * gui.zoom),
-							gui.getYCoordinates(m) + (int) (Constants.Stuck * gui.zoom),
-							Constants.CellSize * gui.zoom - 2 * (int) (Constants.Stuck * gui.zoom),
-							Constants.CellSize * gui.zoom - 2 * (int) (Constants.Stuck * gui.zoom));
-				} else {
-					if (getMatch()[m][n].getIsBomb()) {
-						gui.fill(255, 0, 0);
-						gui.rect(gui.getXCoordinates(n), gui.getYCoordinates(m), Constants.CellSize * gui.zoom,
-								Constants.CellSize * gui.zoom);
-						gui.image(Constants.bomb, gui.getXCoordinates(n), gui.getYCoordinates(m),
-								Constants.CellSize * gui.zoom, Constants.CellSize * gui.zoom);
-					} else {
-						gui.fill((int) (235 * (1.0 - getMatch()[m][n].getSurrBombs() / 8.0)));
-						gui.rect(gui.getXCoordinates(n), gui.getYCoordinates(m), Constants.CellSize * gui.zoom,
-								Constants.CellSize * gui.zoom);
-						gui.textSize((int) (0.85 * Constants.CellSize * gui.zoom));
-						if (match[m][n].getSurrBombs() > 0) {
-							switch (match[m][n].getSurrBombs()) {
-							case 1:
-								gui.fill(0, 0, 255);
-								break;
-							case 2:
-								gui.fill(0, 255, 0, 255);
-								break;
-							case 3:
-								gui.fill(255, 0, 0, 255);
-								break;
-							case 4:
-								gui.fill(0, 0, 155, 255);
-								break;
-							case 5:
-								gui.fill(0, 155, 0, 255);
-								break;
-							case 6:
-								gui.fill(155, 0, 0, 255);
-								break;
-							case 7:
-								gui.fill(155, 0, 155, 255);
-								break;
-							case 8:
-								gui.fill(155, 100, 155, 255);
-								break;
-							}
-							gui.text(match[m][n].getSurrBombs(),
-									gui.getXCoordinates(n) + (int) (0.2 * Constants.CellSize),
-									gui.getYCoordinates(m) + (int) (0.9 * Constants.CellSize * gui.zoom));
-						}
-						if (isRunning() == false) {
-							if (getMatch()[m][n].isMarkedAsBomb()) {
-								gui.line(gui.getXCoordinates(n), gui.getYCoordinates(m),
-										gui.getXCoordinates(n) + Constants.CellSize * gui.zoom,
-										gui.getYCoordinates(m) + Constants.CellSize * gui.zoom);
-								gui.line(gui.getXCoordinates(n) + Constants.CellSize * gui.zoom, gui.getYCoordinates(m),
-										gui.getXCoordinates(n), gui.getYCoordinates(m) + Constants.CellSize * gui.zoom);
-							}
-						}
-
-					}
-				}
+		for (int m = 0; m < gui.getGame().match.length; m++) {
+			for (int n = 0; n < gui.getGame().match[0].length; n++) {
+				getMatch()[m][n].draw(gui);
 			}
 		}
 	}
@@ -272,4 +192,23 @@ public class Game implements IDrawable {
 		this.running = running;
 	}
 
+	public int[] getCoordinates(Cell cell) {
+		Integer[] n=new Integer[2];
+		n[0]=0;
+		n[1]=0;
+		for (Cell[] row:getMatch()) {
+			for (Cell tmp:row) {
+				if (tmp==cell) {
+					int[] ans=new int[2];
+					ans[0]=n[0];
+					ans[1]=n[1];
+					return ans;
+				}
+				n[1]+=1;
+			}
+			n[0]+=1;
+			n[1]=0;
+		}
+		throw new NullPointerException("da basst was nedda");
+	}
 }

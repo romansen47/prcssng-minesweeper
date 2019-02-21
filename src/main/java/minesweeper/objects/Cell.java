@@ -1,11 +1,15 @@
 package minesweeper.objects;
 
+import minesweeper.conf.Constants;
+import minesweeper.interfaces.IDrawable;
+import minesweeper.main.Gui;
+
 /**
  * @author ro
  *
  */
 
-public class Cell {
+public class Cell implements IDrawable{
 
 	/**
 	 * true if cell is open, false else
@@ -156,4 +160,92 @@ public class Cell {
 		return Ans;
 	}
 
+	@Override
+	public void draw(Gui gui) {
+
+		int[] coordinates=gui.getGame().getCoordinates(this);
+		int m=coordinates[0];
+		int n=coordinates[1];
+		if (isOpen()) {
+			gui.fill(255);
+			gui.triangle(gui.getXCoordinates(n), gui.getYCoordinates(m), gui.getXCoordinates(n),
+					gui.getYCoordinates(m) + Constants.CellSize * gui.getZoom(),
+					gui.getXCoordinates(n) + Constants.CellSize * gui.getZoom(), gui.getYCoordinates(m));
+			gui.fill(100);
+			gui.triangle(gui.getXCoordinates(n) + Constants.CellSize * gui.getZoom(),
+					gui.getYCoordinates(m) + Constants.CellSize * gui.getZoom(), gui.getXCoordinates(n),
+					gui.getYCoordinates(m) + Constants.CellSize * gui.getZoom(),
+					gui.getXCoordinates(n) + Constants.CellSize * gui.getZoom(), gui.getYCoordinates(m));
+			if (gui.getMatch()[m][n].isMarkedAsBomb()) {
+				gui.fill(255, 0, 0);
+			} else {
+				gui.fill(180);
+				if (m == Constants.Sgst[0] && n == Constants.Sgst[1]) {
+					if (gui.millis() - Constants.deLay > 6000
+							&& (gui.millis() - Constants.deLay) % 1000 < 500) {
+						gui.fill(0, 255, 0);
+					}
+				}
+			}
+			gui.rect(gui.getXCoordinates(n) + (int) (Constants.Stuck * gui.getZoom()),
+					gui.getYCoordinates(m) + (int) (Constants.Stuck * gui.getZoom()),
+					Constants.CellSize * gui.getZoom() - 2 * (int) (Constants.Stuck * gui.getZoom()),
+					Constants.CellSize * gui.getZoom() - 2 * (int) (Constants.Stuck * gui.getZoom()));
+		} else {
+			if (gui.getMatch()[m][n].getIsBomb()) {
+				gui.fill(255, 0, 0);
+				gui.rect(gui.getXCoordinates(n), gui.getYCoordinates(m), Constants.CellSize * gui.getZoom(),
+						Constants.CellSize * gui.getZoom());
+				gui.image(Constants.bomb, gui.getXCoordinates(n), gui.getYCoordinates(m),
+						Constants.CellSize * gui.getZoom(), Constants.CellSize * gui.getZoom());
+			} else {
+				gui.fill((int) (235 * (1.0 - gui.getMatch()[m][n].getSurrBombs() / 8.0)));
+				gui.rect(gui.getXCoordinates(n), gui.getYCoordinates(m), Constants.CellSize * gui.getZoom(),
+						Constants.CellSize * gui.getZoom());
+				gui.textSize((int) (0.85 * Constants.CellSize * gui.getZoom()));
+				if (gui.getMatch()[m][n].getSurrBombs() > 0) {
+					switch (gui.getMatch()[m][n].getSurrBombs()) {
+					case 1:
+						gui.fill(0, 0, 255);
+						break;
+					case 2:
+						gui.fill(0, 255, 0, 255);
+						break;
+					case 3:
+						gui.fill(255, 0, 0, 255);
+						break;
+					case 4:
+						gui.fill(0, 0, 155, 255);
+						break;
+					case 5:
+						gui.fill(0, 155, 0, 255);
+						break;
+					case 6:
+						gui.fill(155, 0, 0, 255);
+						break;
+					case 7:
+						gui.fill(155, 0, 155, 255);
+						break;
+					case 8:
+						gui.fill(155, 100, 155, 255);
+						break;
+					}
+					gui.text(gui.getMatch()[m][n].getSurrBombs(),
+							gui.getXCoordinates(n) + (int) (0.2 * Constants.CellSize),
+							gui.getYCoordinates(m) + (int) (0.9 * Constants.CellSize * gui.getZoom()));
+				}
+				if (gui.getGame().isRunning() == false) {
+					if (gui.getMatch()[m][n].isMarkedAsBomb()) {
+						gui.line(gui.getXCoordinates(n), gui.getYCoordinates(m),
+								gui.getXCoordinates(n) + Constants.CellSize * gui.getZoom(),
+								gui.getYCoordinates(m) + Constants.CellSize * gui.getZoom());
+						gui.line(gui.getXCoordinates(n) + Constants.CellSize * gui.getZoom(), gui.getYCoordinates(m),
+								gui.getXCoordinates(n), gui.getYCoordinates(m) + Constants.CellSize * gui.getZoom());
+					}
+				}
+
+			}
+		}
+	}
+	
 }

@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import minesweeper.conf.Constants;
 import minesweeper.interfaces.IGui;
+import minesweeper.objects.Cell;
 import minesweeper.objects.Game;
 import processing.event.MouseEvent;
 
@@ -40,12 +41,12 @@ public class Gui extends processing.template.Gui implements IGui {
 	/**
 	 * static Game class
 	 */
-	public Game Match;
+	private Game Game;
 
 	/**
 	 * for saving/reloading purposes
 	 */
-	public static Game TmpMatch = null;
+	private static Game TmpMatch = null;
 
 	/**
 	 * Main Gui object
@@ -59,7 +60,7 @@ public class Gui extends processing.template.Gui implements IGui {
 	 * @param match game for actual Match
 	 */
 	public Gui(Game match) {
-		this.setMatch(match);
+		this.setGame(match);
 	}
 
 	/**
@@ -79,15 +80,15 @@ public class Gui extends processing.template.Gui implements IGui {
 	/**
 	 * Zoom factor
 	 */
-	public float zoom = 1;
+	private float zoom = 1;
 
 	/**
 	 * Getter for Match
 	 * 
 	 * @return Match
 	 */
-	public Game getMatch() {
-		return Match;
+	public Game getGame() {
+		return Game;
 	}
 
 	/**
@@ -95,20 +96,28 @@ public class Gui extends processing.template.Gui implements IGui {
 	 * 
 	 * @param match
 	 */
-	public void setMatch(Game match) {
-		Match = match;
+	public void setGame(Game game) {
+		Game = game;
 	}
 
+	public Cell[][] getMatch(){
+		return getGame().getMatch();
+	}
+	
+	public void setMatch(Cell[][] match) {
+		getGame().setMatch(match);
+	}
+	
 	/**
 	 * Zoom function
 	 * 
 	 * @param e is 1.0 if mouseWheel pulled
 	 */
 	public void zoom(double e) {
-		if (zoom + e * 0.2 > 1) {
-			zoom += e * 0.2;
+		if (getZoom() + e * 0.2 > 1) {
+			setZoom((float)(getZoom() + e * 0.2));
 			if (Constants.xDefault - (int) (e * 0.2 * mouseX) <= 0 && (Constants.xDefault - (int) (e * 0.2 * mouseX)
-					+ Match.getMatch()[0].length * Constants.CellSize * zoom > Match.getMatch()[0].length
+					+ getGame().getMatch()[0].length * Constants.CellSize * getZoom() > getGame().getMatch()[0].length
 							* Constants.CellSize)) {
 				Constants.xDefault += -(int) (e * 0.2 * mouseX);
 			} else {
@@ -116,12 +125,12 @@ public class Gui extends processing.template.Gui implements IGui {
 					Constants.xDefault = 0;
 				} else {
 					Constants.xDefault += -(int) (e * 0.2 * mouseX)
-							+ Match.getMatch()[0].length * Constants.CellSize * zoom
-							- Match.getMatch()[0].length * Constants.CellSize;
+							+ getGame().getMatch()[0].length * Constants.CellSize * getZoom()
+							- getGame().getMatch()[0].length * Constants.CellSize;
 				}
 			}
 			if (Constants.yDefault - (int) (e * 0.2 * mouseY) <= 0 && (Constants.yDefault - (int) (e * 0.2 * mouseY)
-					+ Match.getMatch().length * Constants.CellSize * zoom > Match.getMatch().length
+					+ getGame().getMatch().length * Constants.CellSize * getZoom() > getGame().getMatch().length
 							* Constants.CellSize)) {
 				Constants.yDefault += -(int) (e * 0.2 * mouseY);
 			} else {
@@ -129,8 +138,8 @@ public class Gui extends processing.template.Gui implements IGui {
 					Constants.yDefault = 0;
 				} else {
 					Constants.yDefault += -(int) (e * 0.2 * mouseY)
-							+ Match.getMatch().length * Constants.CellSize * zoom
-							- Match.getMatch().length * Constants.CellSize;
+							+ getGame().getMatch().length * Constants.CellSize * getZoom()
+							- getGame().getMatch().length * Constants.CellSize;
 				}
 			}
 		}
@@ -165,18 +174,18 @@ public class Gui extends processing.template.Gui implements IGui {
 		Constants.minefield = loadImage(Constants.dataString);
 		Constants.ratio = (float) Constants.minefield.height / Constants.minefield.width;
 		IGui.setParam();
-		this.setMatch(new Game(SIZE, (int) ((SIZE) * Constants.ratio)));
-		IGui.setRandomBombs(Match);
-		IGui.setSurrBombsAll(Match);
+		this.setGame(new Game(SIZE, (int) ((SIZE) * Constants.ratio)));
+		IGui.setRandomBombs(getGame());
+		IGui.setSurrBombsAll(getGame());
 		Constants.CellSize = Math.min(Constants.Horizontal, Constants.Vertical) / SIZE;
-		surface.setSize(Match.getMatch()[0].length * Constants.CellSize, Match.getMatch().length * Constants.CellSize);
+		surface.setSize(getGame().getMatch()[0].length * Constants.CellSize, getGame().getMatch().length * Constants.CellSize);
 		surface.setLocation(displayWidth - width >> 1, displayHeight - height >> 1);
 		Constants.bomb = loadImage("bomb.png");
 		Constants.minefield = loadImage(Constants.dataString);
 		Constants.minefield.filter(THRESHOLD, 0.55f);
 		Constants.Stuck = (int) (0.2 * Constants.CellSize);
 		genMinefieldFromImage();
-		IGui.setSurrBombsAll(Match);
+		IGui.setSurrBombsAll(getGame());
 
 	}
 
@@ -185,8 +194,8 @@ public class Gui extends processing.template.Gui implements IGui {
 	 */
 	public void genMinefieldFromImage() {
 
-		for (int i = 0; i < Match.getMatch().length; i++) {
-			for (int j = 0; j < Match.getMatch()[0].length; j++) {
+		for (int i = 0; i < getGame().getMatch().length; i++) {
+			for (int j = 0; j < getGame().getMatch()[0].length; j++) {
 				Color pixCol = new Color(
 						Constants.minefield.get((int) (j * Constants.minefield.width / (SIZE * Constants.ratio)),
 								i * Constants.minefield.height / SIZE));
@@ -198,9 +207,9 @@ public class Gui extends processing.template.Gui implements IGui {
 				 * Match.getMatch()[i][j].setIsBomb(); }
 				 */
 				if (r == 0 && g == 0 && b == 0) {
-					Match.getMatch()[i][j].setIsBomb();
+					getGame().getMatch()[i][j].setIsBomb();
 				} else {
-					Match.getMatch()[i][j].setIsNotABomb();
+					getGame().getMatch()[i][j].setIsNotABomb();
 				}
 			}
 		}
@@ -213,7 +222,7 @@ public class Gui extends processing.template.Gui implements IGui {
 	 * @return x-coordinate
 	 */
 	public int getXCoordinates(int n) {
-		return Constants.xDefault + n * (int) (Constants.CellSize * zoom);
+		return Constants.xDefault + n * (int) (Constants.CellSize * getZoom());
 	}
 
 	/**
@@ -223,7 +232,7 @@ public class Gui extends processing.template.Gui implements IGui {
 	 * @return y-coordinate
 	 */
 	public int getYCoordinates(int m) {
-		return Constants.yDefault + m * (int) (Constants.CellSize * zoom);
+		return Constants.yDefault + m * (int) (Constants.CellSize * getZoom());
 	}
 
 	/**
@@ -267,7 +276,7 @@ public class Gui extends processing.template.Gui implements IGui {
 		}
 		if ((mousePressed) && (mouseButton == RIGHT)) {
 			if ((Constants.xDefault + mouseX - pressedPos[1] <= 0) && (Constants.xDefault + mouseX - pressedPos[1]
-					+ Match.getMatch()[0].length * Constants.CellSize * zoom >= Match.getMatch()[0].length
+					+ getGame().getMatch()[0].length * Constants.CellSize * getZoom() >= getGame().getMatch()[0].length
 							* Constants.CellSize)) {
 				Constants.xDefault += mouseX - pressedPos[1];
 			} else {
@@ -276,8 +285,8 @@ public class Gui extends processing.template.Gui implements IGui {
 				}
 			}
 			if ((Constants.yDefault + mouseY - pressedPos[0] <= 0)
-					&& (Constants.yDefault + Match.getMatch().length * Constants.CellSize * zoom + mouseY
-							- pressedPos[0] >= Match.getMatch().length * Constants.CellSize)) {
+					&& (Constants.yDefault + getGame().getMatch().length * Constants.CellSize * getZoom() + mouseY
+							- pressedPos[0] >= getGame().getMatch().length * Constants.CellSize)) {
 				Constants.yDefault += mouseY - pressedPos[0];
 			} else {
 				if (Constants.yDefault + mouseY - pressedPos[0] > 0) {
@@ -291,20 +300,20 @@ public class Gui extends processing.template.Gui implements IGui {
 		if (keyPressed) {
 			switch (key) {
 			case 'r':
-				Match.reset();
-				zoom = 1;
+				getGame().reset();
+				setZoom(1);
 				break;
 			case 'n':
-				Match.renew();
+				getGame().renew();
 				break;
 			case 'q':
 				exit();
 				break;
 			case '+':
-				zoom = zoom + (float) 0.2;
+				setZoom(getZoom() + (float) 0.2);
 				break;
 			case '-':
-				zoom = zoom - (float) 0.2;
+				setZoom(getZoom() - (float) 0.2);
 				break;
 			}
 		}
@@ -312,19 +321,19 @@ public class Gui extends processing.template.Gui implements IGui {
 		if (Constants.restart) {
 			if (Case == 1 && mouseButton == LEFT) {
 				Constants.restart = false;
-				Match.setRunning(true);
-				this.setMatch(new Game(Match.getMatch().length, Match.getMatch()[0].length));
-				IGui.setRandomBombs(Match);
-				IGui.setSurrBombsAll(Match);
-				zoom = 1;
+				getGame().setRunning(true);
+				this.setGame(new Game(getGame().getMatch().length, getGame().getMatch()[0].length));
+				IGui.setRandomBombs(getGame());
+				IGui.setSurrBombsAll(getGame());
+				setZoom(1);
 				Constants.xDefault = 0;
 				Constants.yDefault = 0;
 				delay(1000);
 
 			}
 		} else {
-			if (Match.isRunning() == false) {
-				Match.draw(this);
+			if (getGame().isRunning() == false) {
+				getGame().draw(this);
 				if (Case == 1 && mouseButton == LEFT) {
 					background(0);
 					fill(255, 0, 0);
@@ -338,46 +347,62 @@ public class Gui extends processing.template.Gui implements IGui {
 				switch (Case) {
 				case 1:
 					if (mouseButton == LEFT) {
-						Constants.success = Match.leftClicked(this, getYIndexFromCoordinates(mouseY) - 1,
+						Constants.success = getGame().leftClicked(this, getYIndexFromCoordinates(mouseY) - 1,
 								getXIndexFromCoordinates(mouseX) - 1);
 					}
 					if (mouseButton == RIGHT) {
-						Match.getMatch()[getYIndexFromCoordinates(mouseY) - 1][getXIndexFromCoordinates(mouseX) - 1]
-								.setMarkedAsBomb(!(Match.getMatch()[getYIndexFromCoordinates(mouseY)
+						getGame().getMatch()[getYIndexFromCoordinates(mouseY) - 1][getXIndexFromCoordinates(mouseX) - 1]
+								.setMarkedAsBomb(!(getGame().getMatch()[getYIndexFromCoordinates(mouseY)
 										- 1][getXIndexFromCoordinates(mouseX) - 1].isMarkedAsBomb()));
 					}
 					break;
 				case 2:
 					if (mouseButton == LEFT) {
-						Constants.success = Match.leftClicked(this, getYIndexFromCoordinates(mouseY) - 1,
+						Constants.success = getGame().leftClicked(this, getYIndexFromCoordinates(mouseY) - 1,
 								getXIndexFromCoordinates(mouseX) - 1);
 					}
 					break;
 				}
-				Match.draw(this);
+				getGame().draw(this);
 			}
 		}
-		if (keyPressed && key == 's' && Match.isRunning()) {
-			if (TmpMatch == null) {
-				TmpMatch = new Game(Match.getMatch().length, Match.getMatch()[0].length);
+		if (keyPressed && key == 's' && getGame().isRunning()) {
+			if (getTmpMatch() == null) {
+				setTmpMatch(new Game(getGame().getMatch().length, getGame().getMatch()[0].length));
 			} else {
-				for (int i = 0; i < Match.getMatch().length; i++) {
-					for (int j = 0; j < Match.getMatch()[0].length; j++) {
-						TmpMatch.getMatch()[i][j] = Match.getMatch()[i][j].copy();
+				for (int i = 0; i < getGame().getMatch().length; i++) {
+					for (int j = 0; j < getGame().getMatch()[0].length; j++) {
+						getTmpMatch().getMatch()[i][j] = getGame().getMatch()[i][j].copy();
 					}
 				}
 			}
 		}
-		if (keyPressed && key == 'l' && Match.isRunning()) {
-			if (TmpMatch != null) {
-				for (int i = 0; i < Match.getMatch().length; i++) {
-					for (int j = 0; j < Match.getMatch()[0].length; j++) {
-						Match.getMatch()[i][j] = TmpMatch.getMatch()[i][j].copy();
+		if (keyPressed && key == 'l' && getGame().isRunning()) {
+			if (getTmpMatch() != null) {
+				for (int i = 0; i < getGame().getMatch().length; i++) {
+					for (int j = 0; j < getGame().getMatch()[0].length; j++) {
+						getGame().getMatch()[i][j] = getTmpMatch().getMatch()[i][j].copy();
 					}
 				}
-				IGui.setSurrBombsAll(TmpMatch);
+				IGui.setSurrBombsAll(getTmpMatch());
 			}
 		}
+	}
+
+	public static Game getTmpMatch() {
+		return TmpMatch;
+	}
+
+	public static void setTmpMatch(Game tmpMatch) {
+		TmpMatch = tmpMatch;
+	}
+
+	public float getZoom() {
+		return zoom;
+	}
+
+	public void setZoom(float zoom) {
+		this.zoom = zoom;
 	}
 
 }
