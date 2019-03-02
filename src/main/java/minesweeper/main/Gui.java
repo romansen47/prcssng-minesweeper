@@ -275,26 +275,26 @@ public class Gui extends processing.template.Gui implements IGui {
 			Constants.deLay = this.millis();
 		}
 		if ((mousePressed) && (mouseButton == RIGHT)) {
-			if ((Constants.xDefault + mouseX - pressedPos[1] <= 0) && (Constants.xDefault + mouseX - pressedPos[1]
+			if ((Constants.xDefault + mouseX - getPressedPos()[1] <= 0) && (Constants.xDefault + mouseX - getPressedPos()[1]
 					+ getGame().getMatch()[0].length * Constants.CellSize * getZoom() >= getGame().getMatch()[0].length
 							* Constants.CellSize)) {
-				Constants.xDefault += mouseX - pressedPos[1];
+				Constants.xDefault += mouseX - getPressedPos()[1];
 			} else {
-				if (Constants.xDefault + mouseX - pressedPos[1] > 0) {
+				if (Constants.xDefault + mouseX - getPressedPos()[1] > 0) {
 					Constants.xDefault = 0;
 				}
 			}
-			if ((Constants.yDefault + mouseY - pressedPos[0] <= 0)
+			if ((Constants.yDefault + mouseY - getPressedPos()[0] <= 0)
 					&& (Constants.yDefault + getGame().getMatch().length * Constants.CellSize * getZoom() + mouseY
-							- pressedPos[0] >= getGame().getMatch().length * Constants.CellSize)) {
-				Constants.yDefault += mouseY - pressedPos[0];
+							- getPressedPos()[0] >= getGame().getMatch().length * Constants.CellSize)) {
+				Constants.yDefault += mouseY - getPressedPos()[0];
 			} else {
-				if (Constants.yDefault + mouseY - pressedPos[0] > 0) {
+				if (Constants.yDefault + mouseY - getPressedPos()[0] > 0) {
 					Constants.yDefault = 0;
 				}
 			}
-			pressedPos[1] = mouseX;
-			pressedPos[0] = mouseY;
+			getPressedPos()[1] = mouseX;
+			getPressedPos()[0] = mouseY;
 		}
 
 		if (keyPressed) {
