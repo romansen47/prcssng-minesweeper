@@ -15,11 +15,10 @@ import processing.event.MouseEvent;
 
 public class Gui extends processing.template.Gui implements IGui {
 
-	
 	final static String mainclass = "minesweeper.main.Gui";
-	final static String path ="";
+	final static String path = "";
 	public static String[] Pics;
-	
+
 	public static void main(String[] args) {
 
 		Pics = new String[1];
@@ -37,7 +36,7 @@ public class Gui extends processing.template.Gui implements IGui {
 		(new Gui()).run(mainclass);
 
 	}
-	
+
 	/**
 	 * static Game class
 	 */
@@ -100,14 +99,14 @@ public class Gui extends processing.template.Gui implements IGui {
 		Game = game;
 	}
 
-	public Cell[][] getMatch(){
+	public Cell[][] getMatch() {
 		return getGame().getMatch();
 	}
-	
+
 	public void setMatch(Cell[][] match) {
 		getGame().setMatch(match);
 	}
-	
+
 	/**
 	 * Zoom function
 	 * 
@@ -115,7 +114,7 @@ public class Gui extends processing.template.Gui implements IGui {
 	 */
 	public void zoom(double e) {
 		if (getZoom() + e * 0.2 > 1) {
-			setZoom((float)(getZoom() + e * 0.2));
+			setZoom((float) (getZoom() + e * 0.2));
 			if (Constants.xDefault - (int) (e * 0.2 * mouseX) <= 0 && (Constants.xDefault - (int) (e * 0.2 * mouseX)
 					+ getGame().getMatch()[0].length * Constants.CellSize * getZoom() > getGame().getMatch()[0].length
 							* Constants.CellSize)) {
@@ -178,7 +177,8 @@ public class Gui extends processing.template.Gui implements IGui {
 		IGui.setRandomBombs(getGame());
 		IGui.setSurrBombsAll(getGame());
 		Constants.CellSize = Math.min(Constants.Horizontal, Constants.Vertical) / SIZE;
-		surface.setSize(getGame().getMatch()[0].length * Constants.CellSize, getGame().getMatch().length * Constants.CellSize);
+		surface.setSize(getGame().getMatch()[0].length * Constants.CellSize,
+				getGame().getMatch().length * Constants.CellSize);
 		surface.setLocation(displayWidth - width >> 1, displayHeight - height >> 1);
 		Constants.bomb = loadImage("bomb.png");
 		Constants.minefield = loadImage(Constants.dataString);
@@ -275,9 +275,9 @@ public class Gui extends processing.template.Gui implements IGui {
 			Constants.deLay = this.millis();
 		}
 		if ((mousePressed) && (mouseButton == RIGHT)) {
-			if ((Constants.xDefault + mouseX - getPressedPos()[1] <= 0) && (Constants.xDefault + mouseX - getPressedPos()[1]
-					+ getGame().getMatch()[0].length * Constants.CellSize * getZoom() >= getGame().getMatch()[0].length
-							* Constants.CellSize)) {
+			if ((Constants.xDefault + mouseX - getPressedPos()[1] <= 0)
+					&& (Constants.xDefault + mouseX - getPressedPos()[1] + getGame().getMatch()[0].length
+							* Constants.CellSize * getZoom() >= getGame().getMatch()[0].length * Constants.CellSize)) {
 				Constants.xDefault += mouseX - getPressedPos()[1];
 			} else {
 				if (Constants.xDefault + mouseX - getPressedPos()[1] > 0) {

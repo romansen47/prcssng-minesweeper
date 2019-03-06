@@ -193,21 +193,21 @@ public class Game implements IDrawable {
 	}
 
 	public int[] getCoordinates(Cell cell) {
-		Integer[] n=new Integer[2];
-		n[0]=0;
-		n[1]=0;
-		for (Cell[] row:getMatch()) {
-			for (Cell tmp:row) {
-				if (tmp==cell) {
-					int[] ans=new int[2];
-					ans[0]=n[0];
-					ans[1]=n[1];
+		Integer[] n = new Integer[2];
+		n[0] = 0;
+		n[1] = 0;
+		for (Cell[] row : getMatch()) {
+			for (Cell tmp : row) {
+				if (tmp == cell) {
+					int[] ans = new int[2];
+					ans[0] = n[0];
+					ans[1] = n[1];
 					return ans;
 				}
-				n[1]+=1;
+				n[1] += 1;
 			}
-			n[0]+=1;
-			n[1]=0;
+			n[0] += 1;
+			n[1] = 0;
 		}
 		throw new NullPointerException("da basst was nedda");
 	}

@@ -9,7 +9,7 @@ import minesweeper.main.Gui;
  *
  */
 
-public class Cell implements IDrawable{
+public class Cell implements IDrawable {
 
 	/**
 	 * true if cell is open, false else
@@ -163,9 +163,9 @@ public class Cell implements IDrawable{
 	@Override
 	public void draw(Gui gui) {
 
-		int[] coordinates=gui.getGame().getCoordinates(this);
-		int m=coordinates[0];
-		int n=coordinates[1];
+		int[] coordinates = gui.getGame().getCoordinates(this);
+		int m = coordinates[0];
+		int n = coordinates[1];
 		if (isOpen()) {
 			gui.fill(255);
 			gui.triangle(gui.getXCoordinates(n), gui.getYCoordinates(m), gui.getXCoordinates(n),
@@ -181,8 +181,7 @@ public class Cell implements IDrawable{
 			} else {
 				gui.fill(180);
 				if (m == Constants.Sgst[0] && n == Constants.Sgst[1]) {
-					if (gui.millis() - Constants.deLay > 6000
-							&& (gui.millis() - Constants.deLay) % 1000 < 500) {
+					if (gui.millis() - Constants.deLay > 6000 && (gui.millis() - Constants.deLay) % 1000 < 500) {
 						gui.fill(0, 255, 0);
 					}
 				}
@@ -247,5 +246,5 @@ public class Cell implements IDrawable{
 			}
 		}
 	}
-	
+
 }
