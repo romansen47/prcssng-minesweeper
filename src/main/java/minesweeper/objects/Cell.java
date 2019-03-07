@@ -47,108 +47,12 @@ public class Cell implements IDrawable {
 	}
 
 	/**
-	 * surrBombs for the cell
-	 * 
-	 * @return returns amount of surrounding bombs
-	 */
-	public int getSurrBombs() {
-		return this.surrBombs;
-	}
-
-	/**
-	 * setter for surrBombs
-	 * 
-	 * @param bombs amount of surrounding bombs
-	 */
-	public void setSurrBombs(int bombs) {
-		this.surrBombs = bombs;
-	}
-
-	/**
-	 * getter for isBomb
-	 * 
-	 * @return true if is bomb
-	 */
-	public boolean getIsBomb() {
-		return this.isBomb;
-	}
-
-	/**
-	 * sets isBomb as true
-	 */
-	public void setIsBomb() {
-		this.isBomb = true;
-	}
-
-	/**
-	 * sets isBomb as false
-	 */
-	public void setIsNotABomb() {
-		this.isBomb = false;
-	}
-
-	/**
-	 * returns value of isOpen
-	 * 
-	 * @return true if is open
-	 */
-	public boolean isOpen() {
-		return isOpen;
-	}
-
-	/**
-	 * setter for isOpen
-	 * 
-	 * @param isOpen current isOpen value
-	 */
-	public void setOpen(boolean isOpen) {
-		this.isOpen = isOpen;
-	}
-
-	/**
-	 * returns value of markedAsBomb
-	 * 
-	 * @return treu if is marked as a bomb
-	 */
-	public boolean isMarkedAsBomb() {
-		return markedAsBomb;
-	}
-
-	/**
-	 * setter for markedAsBomb
-	 * 
-	 * @param markedAsBomb
-	 */
-	public void setMarkedAsBomb(boolean markedAsBomb) {
-		this.markedAsBomb = markedAsBomb;
-	}
-
-	/**
-	 * returns value of beenChecked
-	 * 
-	 * @return if has already been checked while searching for cells with zero
-	 *         surrounding bombs
-	 */
-	public boolean isBeenChecked() {
-		return beenChecked;
-	}
-
-	/**
-	 * setter for beenChecked
-	 * 
-	 * @param beenChecked
-	 */
-	public void setBeenChecked(boolean beenChecked) {
-		this.beenChecked = beenChecked;
-	}
-
-	/**
 	 * cloning function for saving purposes
 	 * 
 	 * @return clone of this cell
 	 */
 	public Cell copy() {
-		Cell Ans = new Cell();
+		final Cell Ans = new Cell();
 		Ans.setOpen(this.isOpen);
 		if (this.isBomb) {
 			Ans.setIsBomb();
@@ -163,10 +67,10 @@ public class Cell implements IDrawable {
 	@Override
 	public void draw(Gui gui) {
 
-		int[] coordinates = gui.getGame().getCoordinates(this);
-		int m = coordinates[0];
-		int n = coordinates[1];
-		if (isOpen()) {
+		final int[] coordinates = gui.getGame().getCoordinates(this);
+		final int m = coordinates[0];
+		final int n = coordinates[1];
+		if (this.isOpen()) {
 			gui.fill(255);
 			gui.triangle(gui.getXCoordinates(n), gui.getYCoordinates(m), gui.getXCoordinates(n),
 					gui.getYCoordinates(m) + Constants.CellSize * gui.getZoom(),
@@ -245,6 +149,102 @@ public class Cell implements IDrawable {
 
 			}
 		}
+	}
+
+	/**
+	 * getter for isBomb
+	 * 
+	 * @return true if is bomb
+	 */
+	public boolean getIsBomb() {
+		return this.isBomb;
+	}
+
+	/**
+	 * surrBombs for the cell
+	 * 
+	 * @return returns amount of surrounding bombs
+	 */
+	public int getSurrBombs() {
+		return this.surrBombs;
+	}
+
+	/**
+	 * returns value of beenChecked
+	 * 
+	 * @return if has already been checked while searching for cells with zero
+	 *         surrounding bombs
+	 */
+	public boolean isBeenChecked() {
+		return this.beenChecked;
+	}
+
+	/**
+	 * returns value of markedAsBomb
+	 * 
+	 * @return treu if is marked as a bomb
+	 */
+	public boolean isMarkedAsBomb() {
+		return this.markedAsBomb;
+	}
+
+	/**
+	 * returns value of isOpen
+	 * 
+	 * @return true if is open
+	 */
+	public boolean isOpen() {
+		return this.isOpen;
+	}
+
+	/**
+	 * setter for beenChecked
+	 * 
+	 * @param beenChecked
+	 */
+	public void setBeenChecked(boolean beenChecked) {
+		this.beenChecked = beenChecked;
+	}
+
+	/**
+	 * sets isBomb as true
+	 */
+	public void setIsBomb() {
+		this.isBomb = true;
+	}
+
+	/**
+	 * sets isBomb as false
+	 */
+	public void setIsNotABomb() {
+		this.isBomb = false;
+	}
+
+	/**
+	 * setter for markedAsBomb
+	 * 
+	 * @param markedAsBomb
+	 */
+	public void setMarkedAsBomb(boolean markedAsBomb) {
+		this.markedAsBomb = markedAsBomb;
+	}
+
+	/**
+	 * setter for isOpen
+	 * 
+	 * @param isOpen current isOpen value
+	 */
+	public void setOpen(boolean isOpen) {
+		this.isOpen = isOpen;
+	}
+
+	/**
+	 * setter for surrBombs
+	 * 
+	 * @param bombs amount of surrounding bombs
+	 */
+	public void setSurrBombs(int bombs) {
+		this.surrBombs = bombs;
 	}
 
 }

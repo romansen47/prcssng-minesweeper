@@ -11,6 +11,6 @@ import minesweeper.main.Gui;
  */
 public interface IDrawable {
 
-	public void draw(Gui gui);
+	void draw(Gui gui);
 
 }
