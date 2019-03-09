@@ -12,14 +12,10 @@ import minesweeper.main.Gui;
 public class Cell implements IDrawable {
 
 	/**
-	 * true if cell is open, false else
+	 * tells whether has been marked as already checked for being not surrounded by
+	 * bombs
 	 */
-	private boolean isOpen;
-
-	/**
-	 * tells how many bombs surrounding
-	 */
-	private int surrBombs;
+	private boolean beenChecked = false;
 
 	/**
 	 * tells whether is a bomb or not
@@ -27,15 +23,19 @@ public class Cell implements IDrawable {
 	private boolean isBomb;
 
 	/**
+	 * true if cell is open, false else
+	 */
+	private boolean isOpen;
+
+	/**
 	 * tells whether has been marked as a bomb
 	 */
 	private boolean markedAsBomb = false;
 
 	/**
-	 * tells whether has been marked as already checked for being not surrounded by
-	 * bombs
+	 * tells how many bombs surrounding
 	 */
-	private boolean beenChecked = false;
+	private int surrBombs;
 
 	/**
 	 * Constructor

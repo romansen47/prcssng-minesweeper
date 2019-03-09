@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project default="create_run_jar" name="Create Runnable Jar for Project minesweeper">
-    <property name="dir.buildfile" value="."/>
-    <property name="dir.jarfile" value="${dir.buildfile}"/>
-    <target name="create_run_jar">
-        <jar destfile="${dir.jarfile}/target/minesweeper_run.jar" filesetmanifest="mergewithoutmain">
-            <manifest>
-                <attribute name="Main-Class" value="minesweeper.main.Gui"/>
-                <attribute name="Class-Path" value="."/>
-            </manifest>
-	    <fileset dir="${dir.jarfile}/target/classes"/>
-            <zipfileset excludes="META-INF/*.SF" src="../prcssng-template/target/template-1.0.0-snapshot.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="../math/target/math-1.0.0-snapshot.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="target/minesweeper-1.0.0-snapshot-jar-with-dependencies.jar"/>
-        </jar>
-    </target>
+<project default="create_run_jar"
+	name="Create Runnable Jar for Project minesweeper">
+	<property name="dir.buildfile" value="." />
+	<property name="dir.jarfile" value="${dir.buildfile}" />
+	<target name="create_run_jar">
+		<jar destfile="${dir.jarfile}/target/minesweeper_run.jar"
+			filesetmanifest="mergewithoutmain">
+			<manifest>
+				<attribute name="Main-Class" value="minesweeper.main.Gui" />
+				<attribute name="Class-Path" value="." />
+			</manifest>
+			<fileset dir="${dir.jarfile}/target/classes" />
+			<zipfileset excludes="META-INF/*.SF"
+				src="../prcssng-template/target/template-1.0.0-snapshot.jar" />
+			<zipfileset excludes="META-INF/*.SF"
+				src="../math/target/math-1.0.0-snapshot.jar" />
+			<zipfileset excludes="META-INF/*.SF"
+				src="target/minesweeper-1.0.0-snapshot-jar-with-dependencies.jar" />
+		</jar>
+	</target>
 </project>

@@ -21,14 +21,14 @@ public class Gui extends processing.template.Gui implements IGui {
 	public static String[] Pics;
 
 	/**
-	 * for saving/reloading purposes
-	 */
-	private static Game TmpMatch = null;
-
-	/**
 	 * Amount of cells along the longest side
 	 */
 	private static int SIZE;
+
+	/**
+	 * for saving/reloading purposes
+	 */
+	private static Game TmpMatch = null;
 
 	public static Game getTmpMatch() {
 		return Gui.TmpMatch;

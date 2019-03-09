@@ -12,16 +12,26 @@ import processing.core.PImage;
 public class Constants {
 
 	/**
-	 * dimensions of screen
+	 * 
 	 */
-	public static Dimension screenSize;
+	public static PImage bomb, minefield;
+	/**
+	 * Size of a cell
+	 */
+	public static int CellSize;
+	/**
+	 * Location of png to first minefield
+	 */
+	public static String dataString;
+
+	public static int deLay = 4000;
+
 	public static int Horizontal;
-	public static int Vertical;
 
 	/**
-	 * amount of cells along longest side of frame
+	 * 
 	 */
-	public static int Size;
+	public static int intensity;
 
 	/**
 	 * ratio of initial picture
@@ -29,14 +39,21 @@ public class Constants {
 	public static float ratio;
 
 	/**
-	 * Location of png to first minefield
+	 * Restart flag
 	 */
-	public static String dataString;
+	public static boolean restart = false;
 
 	/**
-	 * Size of a cell
+	 * dimensions of screen
 	 */
-	public static int CellSize;
+	public static Dimension screenSize;
+
+	public static int[] Sgst = new int[2];
+
+	/**
+	 * amount of cells along longest side of frame
+	 */
+	public static int Size;
 
 	/**
 	 * 
@@ -44,31 +61,14 @@ public class Constants {
 	public static int Stuck;
 
 	/**
-	 * Restart flag
-	 */
-	public static boolean restart = false;
-
-	/**
-	 * 
-	 */
-	public static int xDefault = 0, yDefault = 0;
-
-	/**
 	 * 
 	 */
 	public static String success, BOMB, MINEFIELD;
 
+	public static int Vertical;
 	/**
 	 * 
 	 */
-	public static PImage bomb, minefield;
-
-	/**
-	 * 
-	 */
-	public static int intensity;
-
-	public static int deLay = 4000;
-	public static int[] Sgst = new int[2];
+	public static int xDefault = 0, yDefault = 0;
 
 }
