@@ -315,6 +315,7 @@ public class Gui extends processing.template.Gui implements IGui {
 
 	/**
 	 * checks for mouse wheel input
+	 * 
 	 * @param event the mouse wheel event
 	 */
 	@Override

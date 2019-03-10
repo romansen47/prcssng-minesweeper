@@ -50,7 +50,8 @@ public class Game implements IDrawable {
 	}
 
 	/**
-	 * Transformator for coordintes 
+	 * Transformator for coordintes
+	 * 
 	 * @param cell the cell
 	 * @return the coordinates
 	 */
@@ -91,8 +92,8 @@ public class Game implements IDrawable {
 	 * Function for click of left mouse button
 	 * 
 	 * @param gui the gui object
-	 * @param m y-position of cell
-	 * @param n x-position of cell
+	 * @param m   y-position of cell
+	 * @param n   x-position of cell
 	 * @return completion for final feedback
 	 */
 	public String leftClicked(Gui gui, int m, int n) {
