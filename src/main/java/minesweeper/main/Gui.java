@@ -53,9 +53,9 @@ public class Gui extends processing.template.Gui implements IGui {
 	}
 
 	/**
-	 * Setter for {@SIZE}
+	 * Setter for SIZE
 	 * 
-	 * @param size
+	 * @param size the size
 	 */
 	public static void setSIZE(int size) {
 		Gui.SIZE = size;
@@ -314,9 +314,8 @@ public class Gui extends processing.template.Gui implements IGui {
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see processing.template.IGuiTemplate#mouseWheel(MouseEvent event)
+	 * checks for mouse wheel input
+	 * @param event the mouse wheel event
 	 */
 	@Override
 	public void mouseWheel(MouseEvent event) {
@@ -325,9 +324,9 @@ public class Gui extends processing.template.Gui implements IGui {
 	}
 
 	/**
-	 * Getter for Match
+	 * Getter for Game
 	 * 
-	 * @param match
+	 * @param game the game
 	 */
 	public void setGame(Game game) {
 		this.Game = game;

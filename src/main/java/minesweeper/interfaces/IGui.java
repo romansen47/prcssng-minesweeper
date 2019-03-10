@@ -29,10 +29,9 @@ public interface IGui {
 	}
 
 	/**
+	 * sets bombs randomly
 	 * 
-	 * @param Mines
-	 * 
-	 *              sets bombs randomly
+	 * @param Mines the game
 	 */
 	static void setRandomBombs(Game Mines) {
 		for (int i = 0; i < Mines.getMatch().length; i++) {
@@ -46,11 +45,10 @@ public interface IGui {
 	}
 
 	/**
+	 * counts all bombs around cell(m,n)
 	 * 
 	 * @param m y-Coordinate
 	 * @param n x-Coordinate
-	 * 
-	 *          counts all bombs around cell(m,n)
 	 */
 	static void setSurrBombs(int m, int n, Game Mines) {
 		int tmpSurrBombs = 0;
@@ -66,10 +64,9 @@ public interface IGui {
 	}
 
 	/**
+	 * determines all surrBombs for all cells
 	 * 
-	 * @param Mines
-	 * 
-	 *              determines all surrBombs for all cells
+	 * @param Mines the game
 	 */
 	static void setSurrBombsAll(Game Mines) {
 		for (int i = 0; i < Mines.getMatch().length; i++) {

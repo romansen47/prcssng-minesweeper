@@ -49,6 +49,11 @@ public class Game implements IDrawable {
 		}
 	}
 
+	/**
+	 * Transformator for coordintes 
+	 * @param cell the cell
+	 * @return the coordinates
+	 */
 	public int[] getCoordinates(Cell cell) {
 		final Integer[] n = new Integer[2];
 		n[0] = 0;
@@ -72,7 +77,7 @@ public class Game implements IDrawable {
 	/**
 	 * Getter for match
 	 * 
-	 * @return match
+	 * @return match the game
 	 */
 	public Cell[][] getMatch() {
 		return this.match;
@@ -85,6 +90,7 @@ public class Game implements IDrawable {
 	/**
 	 * Function for click of left mouse button
 	 * 
+	 * @param gui the gui object
 	 * @param m y-position of cell
 	 * @param n x-position of cell
 	 * @return completion for final feedback

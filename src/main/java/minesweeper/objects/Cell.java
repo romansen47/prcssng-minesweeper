@@ -200,7 +200,7 @@ public class Cell implements IDrawable {
 	/**
 	 * setter for beenChecked
 	 * 
-	 * @param beenChecked
+	 * @param beenChecked the value
 	 */
 	public void setBeenChecked(boolean beenChecked) {
 		this.beenChecked = beenChecked;
@@ -223,7 +223,7 @@ public class Cell implements IDrawable {
 	/**
 	 * setter for markedAsBomb
 	 * 
-	 * @param markedAsBomb
+	 * @param markedAsBomb the value
 	 */
 	public void setMarkedAsBomb(boolean markedAsBomb) {
 		this.markedAsBomb = markedAsBomb;
