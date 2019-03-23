@@ -16,12 +16,13 @@ import processing.event.MouseEvent;
 
 public class Gui extends processing.template.Gui implements IGui {
 
-	final static String mainclass = "minesweeper.main.Gui";
-	final static String path = "";
-	public static String[] Pics;
+	final static String		mainclass	= "minesweeper.main.Gui";
+	final static String		path		= "";
+	public static String[]	Pics;
 
 	/**
-	 * Amount of cells along the longest side
+	 * Amount of cells along the longest
+	 * side
 	 */
 	private static int SIZE;
 
@@ -82,7 +83,8 @@ public class Gui extends processing.template.Gui implements IGui {
 	}
 
 	/**
-	 * Another constructor using the actual setup
+	 * Another constructor using the actual
+	 * setup
 	 *
 	 * @param match game for actual Match
 	 */
@@ -121,28 +123,28 @@ public class Gui extends processing.template.Gui implements IGui {
 					Constants.yDefault = 0;
 				}
 			}
-			processing.template.Gui.getPressedPos()[1] = mouseX;
-			processing.template.Gui.getPressedPos()[0] = mouseY;
+			processing.template.Gui.getPressedPos()[1]	= mouseX;
+			processing.template.Gui.getPressedPos()[0]	= mouseY;
 		}
 
 		if (keyPressed) {
 			switch (key) {
-			case 'r':
-				getGame().reset();
-				setZoom(1);
-				break;
-			case 'n':
-				getGame().renew();
-				break;
-			case 'q':
-				exit();
-				break;
-			case '+':
-				setZoom(getZoom() + (float) 0.2);
-				break;
-			case '-':
-				setZoom(getZoom() - (float) 0.2);
-				break;
+				case 'r':
+					getGame().reset();
+					setZoom(1);
+					break;
+				case 'n':
+					getGame().renew();
+					break;
+				case 'q':
+					exit();
+					break;
+				case '+':
+					setZoom(getZoom() + (float) 0.2);
+					break;
+				case '-':
+					setZoom(getZoom() - (float) 0.2);
+					break;
 			}
 		}
 
@@ -154,8 +156,8 @@ public class Gui extends processing.template.Gui implements IGui {
 				IGui.setRandomBombs(getGame());
 				IGui.setSurrBombsAll(getGame());
 				setZoom(1);
-				Constants.xDefault = 0;
-				Constants.yDefault = 0;
+				Constants.xDefault	= 0;
+				Constants.yDefault	= 0;
 				delay(1000);
 
 			}
@@ -173,23 +175,24 @@ public class Gui extends processing.template.Gui implements IGui {
 			} else {
 				this.background(255);
 				switch (Case) {
-				case 1:
-					if (mouseButton == PConstants.LEFT) {
-						Constants.success = getGame().leftClicked(this, getYIndexFromCoordinates(mouseY) - 1,
-								getXIndexFromCoordinates(mouseX) - 1);
-					}
-					if (mouseButton == PConstants.RIGHT) {
-						getGame().getMatch()[getYIndexFromCoordinates(mouseY) - 1][getXIndexFromCoordinates(mouseX) - 1]
-								.setMarkedAsBomb(!(getGame().getMatch()[getYIndexFromCoordinates(mouseY)
-										- 1][getXIndexFromCoordinates(mouseX) - 1].isMarkedAsBomb()));
-					}
-					break;
-				case 2:
-					if (mouseButton == PConstants.LEFT) {
-						Constants.success = getGame().leftClicked(this, getYIndexFromCoordinates(mouseY) - 1,
-								getXIndexFromCoordinates(mouseX) - 1);
-					}
-					break;
+					case 1:
+						if (mouseButton == PConstants.LEFT) {
+							Constants.success = getGame().leftClicked(this, getYIndexFromCoordinates(mouseY) - 1,
+									getXIndexFromCoordinates(mouseX) - 1);
+						}
+						if (mouseButton == PConstants.RIGHT) {
+							getGame().getMatch()[getYIndexFromCoordinates(mouseY) - 1][getXIndexFromCoordinates(mouseX)
+									- 1].setMarkedAsBomb(
+											!(getGame().getMatch()[getYIndexFromCoordinates(mouseY)
+													- 1][getXIndexFromCoordinates(mouseX) - 1].isMarkedAsBomb()));
+						}
+						break;
+					case 2:
+						if (mouseButton == PConstants.LEFT) {
+							Constants.success = getGame().leftClicked(this, getYIndexFromCoordinates(mouseY) - 1,
+									getXIndexFromCoordinates(mouseX) - 1);
+						}
+						break;
 				}
 				getGame().draw(this);
 			}
@@ -218,20 +221,23 @@ public class Gui extends processing.template.Gui implements IGui {
 	}
 
 	/**
-	 * Creates minefield from a given picture
+	 * Creates minefield from a given
+	 * picture
 	 */
 	public void genMinefieldFromImage() {
 
 		for (int i = 0; i < getGame().getMatch().length; i++) {
 			for (int j = 0; j < getGame().getMatch()[0].length; j++) {
-				final Color pixCol = new Color(
+				final Color	pixCol	= new Color(
 						Constants.minefield.get((int) (j * Constants.minefield.width / (Gui.SIZE * Constants.ratio)),
 								i * Constants.minefield.height / Gui.SIZE));
-				final int r = pixCol.getRed();
-				final int g = pixCol.getGreen();
-				final int b = pixCol.getBlue();
+				final int	r		= pixCol.getRed();
+				final int	g		= pixCol.getGreen();
+				final int	b		= pixCol.getBlue();
 				/*
-				 * if ( (Math.sqrt(r*r+g*g+b*b)<3*Constants.intensity) ){
+				 * if (
+				 * (Math.sqrt(r*r+g*g+b*b)<3*Constants.
+				 * intensity) ){
 				 * Match.getMatch()[i][j].setIsBomb(); }
 				 */
 				if (r == 0 && g == 0 && b == 0) {
@@ -257,7 +263,8 @@ public class Gui extends processing.template.Gui implements IGui {
 	}
 
 	/**
-	 * Translator for X-coordinate to index n
+	 * Translator for X-coordinate to index
+	 * n
 	 *
 	 * @param n x-position
 	 * @return x-coordinate
@@ -281,7 +288,8 @@ public class Gui extends processing.template.Gui implements IGui {
 	}
 
 	/**
-	 * Translator for Y-coordinate to index m
+	 * Translator for Y-coordinate to index
+	 * m
 	 *
 	 * @param m y-position
 	 * @return y-coordinate
@@ -347,8 +355,8 @@ public class Gui extends processing.template.Gui implements IGui {
 		this.background(255);
 		frameRate(24);
 		surface.setResizable(true);
-		Constants.minefield = this.loadImage(Constants.dataString);
-		Constants.ratio = (float) Constants.minefield.height / Constants.minefield.width;
+		Constants.minefield	= this.loadImage(Constants.dataString);
+		Constants.ratio		= (float) Constants.minefield.height / Constants.minefield.width;
 		IGui.setParam();
 		setGame(new Game(Gui.SIZE, (int) ((Gui.SIZE) * Constants.ratio)));
 		IGui.setRandomBombs(getGame());
@@ -357,8 +365,8 @@ public class Gui extends processing.template.Gui implements IGui {
 		surface.setSize(getGame().getMatch()[0].length * Constants.CellSize,
 				getGame().getMatch().length * Constants.CellSize);
 		surface.setLocation(displayWidth - width >> 1, displayHeight - height >> 1);
-		Constants.bomb = this.loadImage("bomb.png");
-		Constants.minefield = this.loadImage(Constants.dataString);
+		Constants.bomb		= this.loadImage("bomb.png");
+		Constants.minefield	= this.loadImage(Constants.dataString);
 		Constants.minefield.filter(PConstants.THRESHOLD, 0.55f);
 		Constants.Stuck = (int) (0.2 * Constants.CellSize);
 		genMinefieldFromImage();

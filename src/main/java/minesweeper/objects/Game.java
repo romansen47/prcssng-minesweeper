@@ -26,7 +26,8 @@ public class Game implements IDrawable {
 	private boolean running = true;
 
 	/**
-	 * Constructor using dimension parameters
+	 * Constructor using dimension
+	 * parameters
 	 *
 	 * @param dimY Height of the game field
 	 * @param dimX Width of the game field
@@ -57,20 +58,20 @@ public class Game implements IDrawable {
 	 */
 	public int[] getCoordinates(Cell cell) {
 		final Integer[] n = new Integer[2];
-		n[0] = 0;
-		n[1] = 0;
+		n[0]	= 0;
+		n[1]	= 0;
 		for (final Cell[] row : getMatch()) {
 			for (final Cell tmp : row) {
 				if (tmp == cell) {
 					final int[] ans = new int[2];
-					ans[0] = n[0];
-					ans[1] = n[1];
+					ans[0]	= n[0];
+					ans[1]	= n[1];
 					return ans;
 				}
 				n[1] += 1;
 			}
-			n[0] += 1;
-			n[1] = 0;
+			n[0]	+= 1;
+			n[1]	= 0;
 		}
 		throw new NullPointerException("da basst was nedda");
 	}
@@ -89,7 +90,8 @@ public class Game implements IDrawable {
 	}
 
 	/**
-	 * Function for click of left mouse button
+	 * Function for click of left mouse
+	 * button
 	 *
 	 * @param gui the gui object
 	 * @param m   y-position of cell
@@ -136,26 +138,26 @@ public class Game implements IDrawable {
 	}
 
 	public int[] RandomOpenCell(Gui gui) {
-		int[][] tmp = new int[2][0];
-		int[][] ListOfOpenCells = new int[2][0];
+		int[][]	tmp				= new int[2][0];
+		int[][]	ListOfOpenCells	= new int[2][0];
 		for (int i = 0; i < match.length; i++) {
 			for (int j = 0; j < match[0].length; j++) {
 				if (match[i][j].isOpen() && !(match[i][j].getIsBomb())) {
 					tmp = new int[2][tmp[0].length + 1];
 					for (int l = 0; l < ListOfOpenCells[0].length; l++) {
-						tmp[0][l] = ListOfOpenCells[0][l];
-						tmp[1][l] = ListOfOpenCells[1][l];
+						tmp[0][l]	= ListOfOpenCells[0][l];
+						tmp[1][l]	= ListOfOpenCells[1][l];
 					}
-					tmp[0][ListOfOpenCells[0].length] = i;
-					tmp[1][ListOfOpenCells[1].length] = j;
-					ListOfOpenCells = tmp;
+					tmp[0][ListOfOpenCells[0].length]	= i;
+					tmp[1][ListOfOpenCells[1].length]	= j;
+					ListOfOpenCells						= tmp;
 				}
 			}
 		}
-		final int[] ans = new int[2];
-		final int rand = (int) gui.random(ListOfOpenCells[0].length - 1);
-		ans[0] = ListOfOpenCells[0][rand];
-		ans[1] = ListOfOpenCells[1][rand];
+		final int[]	ans		= new int[2];
+		final int	rand	= (int) gui.random(ListOfOpenCells[0].length - 1);
+		ans[0]	= ListOfOpenCells[0][rand];
+		ans[1]	= ListOfOpenCells[1][rand];
 		return ans;
 	}
 
@@ -184,7 +186,8 @@ public class Game implements IDrawable {
 	/**
 	 * Setter for match
 	 *
-	 * @param game the game to use for the match
+	 * @param game the game to use for the
+	 *             match
 	 */
 	public void setMatch(Cell[][] game) {
 		match = game;
@@ -195,8 +198,10 @@ public class Game implements IDrawable {
 	}
 
 	/**
-	 * Sets all cells with 0 neighbours next to cell in (m,n) to zero Recursively
-	 * defined - hence bounded with respect to recursion depth
+	 * Sets all cells with 0 neighbours next
+	 * to cell in (m,n) to zero Recursively
+	 * defined - hence bounded with respect
+	 * to recursion depth
 	 *
 	 * @param m y-position of cell
 	 * @param n x-position of cell

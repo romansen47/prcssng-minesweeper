@@ -14,15 +14,15 @@ public class Constants {
 	/**
 	 *
 	 */
-	public static PImage bomb, minefield;
+	public static PImage	bomb, minefield;
 	/**
 	 * Size of a cell
 	 */
-	public static int CellSize;
+	public static int		CellSize;
 	/**
 	 * Location of png to first minefield
 	 */
-	public static String dataString;
+	public static String	dataString;
 
 	public static int deLay = 4000;
 
@@ -51,7 +51,8 @@ public class Constants {
 	public static int[] Sgst = new int[2];
 
 	/**
-	 * amount of cells along longest side of frame
+	 * amount of cells along longest side of
+	 * frame
 	 */
 	public static int Size;
 
@@ -65,10 +66,10 @@ public class Constants {
 	 */
 	public static String success, BOMB, MINEFIELD;
 
-	public static int Vertical;
+	public static int	Vertical;
 	/**
 	 *
 	 */
-	public static int xDefault = 0, yDefault = 0;
+	public static int	xDefault	= 0, yDefault = 0;
 
 }

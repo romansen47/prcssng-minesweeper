@@ -12,8 +12,9 @@ import minesweeper.main.Gui;
 public class Cell implements IDrawable {
 
 	/**
-	 * tells whether has been marked as already checked for being not surrounded by
-	 * bombs
+	 * tells whether has been marked as
+	 * already checked for being not
+	 * surrounded by bombs
 	 */
 	private boolean beenChecked = false;
 
@@ -28,7 +29,8 @@ public class Cell implements IDrawable {
 	private boolean isOpen;
 
 	/**
-	 * tells whether has been marked as a bomb
+	 * tells whether has been marked as a
+	 * bomb
 	 */
 	private boolean markedAsBomb = false;
 
@@ -41,9 +43,9 @@ public class Cell implements IDrawable {
 	 * Constructor
 	 */
 	public Cell() {
-		surrBombs = 0;
-		isOpen = true;
-		isBomb = false;
+		surrBombs	= 0;
+		isOpen		= true;
+		isBomb		= false;
 	}
 
 	/**
@@ -67,9 +69,9 @@ public class Cell implements IDrawable {
 	@Override
 	public void draw(Gui gui) {
 
-		final int[] coordinates = gui.getGame().getCoordinates(this);
-		final int m = coordinates[0];
-		final int n = coordinates[1];
+		final int[]	coordinates	= gui.getGame().getCoordinates(this);
+		final int	m			= coordinates[0];
+		final int	n			= coordinates[1];
 		if (isOpen()) {
 			gui.fill(255);
 			gui.triangle(gui.getXCoordinates(n), gui.getYCoordinates(m), gui.getXCoordinates(n),
@@ -108,30 +110,30 @@ public class Cell implements IDrawable {
 				gui.textSize((int) (0.85 * Constants.CellSize * gui.getZoom()));
 				if (gui.getMatch()[m][n].getSurrBombs() > 0) {
 					switch (gui.getMatch()[m][n].getSurrBombs()) {
-					case 1:
-						gui.fill(0, 0, 255);
-						break;
-					case 2:
-						gui.fill(0, 255, 0, 255);
-						break;
-					case 3:
-						gui.fill(255, 0, 0, 255);
-						break;
-					case 4:
-						gui.fill(0, 0, 155, 255);
-						break;
-					case 5:
-						gui.fill(0, 155, 0, 255);
-						break;
-					case 6:
-						gui.fill(155, 0, 0, 255);
-						break;
-					case 7:
-						gui.fill(155, 0, 155, 255);
-						break;
-					case 8:
-						gui.fill(155, 100, 155, 255);
-						break;
+						case 1:
+							gui.fill(0, 0, 255);
+							break;
+						case 2:
+							gui.fill(0, 255, 0, 255);
+							break;
+						case 3:
+							gui.fill(255, 0, 0, 255);
+							break;
+						case 4:
+							gui.fill(0, 0, 155, 255);
+							break;
+						case 5:
+							gui.fill(0, 155, 0, 255);
+							break;
+						case 6:
+							gui.fill(155, 0, 0, 255);
+							break;
+						case 7:
+							gui.fill(155, 0, 155, 255);
+							break;
+						case 8:
+							gui.fill(155, 100, 155, 255);
+							break;
 					}
 					gui.text(gui.getMatch()[m][n].getSurrBombs(),
 							gui.getXCoordinates(n) + (int) (0.2 * Constants.CellSize),
@@ -163,7 +165,8 @@ public class Cell implements IDrawable {
 	/**
 	 * surrBombs for the cell
 	 *
-	 * @return returns amount of surrounding bombs
+	 * @return returns amount of surrounding
+	 *         bombs
 	 */
 	public int getSurrBombs() {
 		return surrBombs;
@@ -172,8 +175,9 @@ public class Cell implements IDrawable {
 	/**
 	 * returns value of beenChecked
 	 *
-	 * @return if has already been checked while searching for cells with zero
-	 *         surrounding bombs
+	 * @return if has already been checked
+	 *         while searching for cells
+	 *         with zero surrounding bombs
 	 */
 	public boolean isBeenChecked() {
 		return beenChecked;
@@ -241,7 +245,8 @@ public class Cell implements IDrawable {
 	/**
 	 * setter for surrBombs
 	 *
-	 * @param bombs amount of surrounding bombs
+	 * @param bombs amount of surrounding
+	 *              bombs
 	 */
 	public void setSurrBombs(int bombs) {
 		surrBombs = bombs;

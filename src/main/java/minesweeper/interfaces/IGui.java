@@ -11,7 +11,8 @@ import minesweeper.objects.Game;
  */
 
 /*
- * The IGui interface contains operations for Gui class
+ * The IGui interface contains
+ * operations for Gui class
  */
 
 public interface IGui {
@@ -21,10 +22,10 @@ public interface IGui {
 	 */
 	static void setParam() {
 
-		Constants.screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		Constants.Vertical = (int) (0.85 * Constants.screenSize.getHeight());
-		Constants.Horizontal = (int) (Constants.ratio * 0.85 * Constants.screenSize.getWidth());
-		Constants.Size = Math.min(Constants.Horizontal, Constants.Vertical);
+		Constants.screenSize	= Toolkit.getDefaultToolkit().getScreenSize();
+		Constants.Vertical		= (int) (0.85 * Constants.screenSize.getHeight());
+		Constants.Horizontal	= (int) (Constants.ratio * 0.85 * Constants.screenSize.getWidth());
+		Constants.Size			= Math.min(Constants.Horizontal, Constants.Vertical);
 
 	}
 
@@ -64,7 +65,8 @@ public interface IGui {
 	}
 
 	/**
-	 * determines all surrBombs for all cells
+	 * determines all surrBombs for all
+	 * cells
 	 *
 	 * @param Mines the game
 	 */
