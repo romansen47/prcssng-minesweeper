@@ -30,7 +30,7 @@ public interface IGui {
 
 	/**
 	 * sets bombs randomly
-	 * 
+	 *
 	 * @param Mines the game
 	 */
 	static void setRandomBombs(Game Mines) {
@@ -46,7 +46,7 @@ public interface IGui {
 
 	/**
 	 * counts all bombs around cell(m,n)
-	 * 
+	 *
 	 * @param m y-Coordinate
 	 * @param n x-Coordinate
 	 */
@@ -65,7 +65,7 @@ public interface IGui {
 
 	/**
 	 * determines all surrBombs for all cells
-	 * 
+	 *
 	 * @param Mines the game
 	 */
 	static void setSurrBombsAll(Game Mines) {

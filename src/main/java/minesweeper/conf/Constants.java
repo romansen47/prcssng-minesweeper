@@ -5,14 +5,14 @@ import java.awt.Dimension;
 import processing.core.PImage;
 
 /**
- * 
+ *
  * @author ro
  *
  */
 public class Constants {
 
 	/**
-	 * 
+	 *
 	 */
 	public static PImage bomb, minefield;
 	/**
@@ -29,7 +29,7 @@ public class Constants {
 	public static int Horizontal;
 
 	/**
-	 * 
+	 *
 	 */
 	public static int intensity;
 
@@ -56,18 +56,18 @@ public class Constants {
 	public static int Size;
 
 	/**
-	 * 
+	 *
 	 */
 	public static int Stuck;
 
 	/**
-	 * 
+	 *
 	 */
 	public static String success, BOMB, MINEFIELD;
 
 	public static int Vertical;
 	/**
-	 * 
+	 *
 	 */
 	public static int xDefault = 0, yDefault = 0;
 

@@ -41,26 +41,26 @@ public class Cell implements IDrawable {
 	 * Constructor
 	 */
 	public Cell() {
-		this.surrBombs = 0;
-		this.isOpen = true;
-		this.isBomb = false;
+		surrBombs = 0;
+		isOpen = true;
+		isBomb = false;
 	}
 
 	/**
 	 * cloning function for saving purposes
-	 * 
+	 *
 	 * @return clone of this cell
 	 */
 	public Cell copy() {
 		final Cell Ans = new Cell();
-		Ans.setOpen(this.isOpen);
-		if (this.isBomb) {
+		Ans.setOpen(isOpen);
+		if (isBomb) {
 			Ans.setIsBomb();
 		} else {
 			Ans.setIsNotABomb();
 		}
-		Ans.setMarkedAsBomb(this.isMarkedAsBomb());
-		Ans.setSurrBombs(this.getSurrBombs());
+		Ans.setMarkedAsBomb(isMarkedAsBomb());
+		Ans.setSurrBombs(getSurrBombs());
 		return Ans;
 	}
 
@@ -70,7 +70,7 @@ public class Cell implements IDrawable {
 		final int[] coordinates = gui.getGame().getCoordinates(this);
 		final int m = coordinates[0];
 		final int n = coordinates[1];
-		if (this.isOpen()) {
+		if (isOpen()) {
 			gui.fill(255);
 			gui.triangle(gui.getXCoordinates(n), gui.getYCoordinates(m), gui.getXCoordinates(n),
 					gui.getYCoordinates(m) + Constants.CellSize * gui.getZoom(),
@@ -153,53 +153,53 @@ public class Cell implements IDrawable {
 
 	/**
 	 * getter for isBomb
-	 * 
+	 *
 	 * @return true if is bomb
 	 */
 	public boolean getIsBomb() {
-		return this.isBomb;
+		return isBomb;
 	}
 
 	/**
 	 * surrBombs for the cell
-	 * 
+	 *
 	 * @return returns amount of surrounding bombs
 	 */
 	public int getSurrBombs() {
-		return this.surrBombs;
+		return surrBombs;
 	}
 
 	/**
 	 * returns value of beenChecked
-	 * 
+	 *
 	 * @return if has already been checked while searching for cells with zero
 	 *         surrounding bombs
 	 */
 	public boolean isBeenChecked() {
-		return this.beenChecked;
+		return beenChecked;
 	}
 
 	/**
 	 * returns value of markedAsBomb
-	 * 
+	 *
 	 * @return treu if is marked as a bomb
 	 */
 	public boolean isMarkedAsBomb() {
-		return this.markedAsBomb;
+		return markedAsBomb;
 	}
 
 	/**
 	 * returns value of isOpen
-	 * 
+	 *
 	 * @return true if is open
 	 */
 	public boolean isOpen() {
-		return this.isOpen;
+		return isOpen;
 	}
 
 	/**
 	 * setter for beenChecked
-	 * 
+	 *
 	 * @param beenChecked the value
 	 */
 	public void setBeenChecked(boolean beenChecked) {
@@ -210,19 +210,19 @@ public class Cell implements IDrawable {
 	 * sets isBomb as true
 	 */
 	public void setIsBomb() {
-		this.isBomb = true;
+		isBomb = true;
 	}
 
 	/**
 	 * sets isBomb as false
 	 */
 	public void setIsNotABomb() {
-		this.isBomb = false;
+		isBomb = false;
 	}
 
 	/**
 	 * setter for markedAsBomb
-	 * 
+	 *
 	 * @param markedAsBomb the value
 	 */
 	public void setMarkedAsBomb(boolean markedAsBomb) {
@@ -231,7 +231,7 @@ public class Cell implements IDrawable {
 
 	/**
 	 * setter for isOpen
-	 * 
+	 *
 	 * @param isOpen current isOpen value
 	 */
 	public void setOpen(boolean isOpen) {
@@ -240,11 +240,11 @@ public class Cell implements IDrawable {
 
 	/**
 	 * setter for surrBombs
-	 * 
+	 *
 	 * @param bombs amount of surrounding bombs
 	 */
 	public void setSurrBombs(int bombs) {
-		this.surrBombs = bombs;
+		surrBombs = bombs;
 	}
 
 }
