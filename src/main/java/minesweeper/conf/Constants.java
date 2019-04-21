@@ -24,7 +24,7 @@ public class Constants {
 	 */
 	public static String	dataString;
 
-	public static int deLay = 4000;
+	public static int deLay = 1000;
 
 	public static int Horizontal;
 

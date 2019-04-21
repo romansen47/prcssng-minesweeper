@@ -1,8 +1,12 @@
 package minesweeper.interfaces;
 
+import java.awt.Color;
 import java.awt.Toolkit;
+import java.io.IOException;
 
 import minesweeper.conf.Constants;
+import minesweeper.conf.JavaDownloadFileFromURL;
+import minesweeper.main.Gui;
 import minesweeper.objects.Game;
 
 /**
@@ -77,4 +81,5 @@ public interface IGui {
 			}
 		}
 	}
+
 }

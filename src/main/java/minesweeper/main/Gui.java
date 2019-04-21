@@ -1,8 +1,10 @@
 package minesweeper.main;
 
 import java.awt.Color;
+import java.io.IOException;
 
 import minesweeper.conf.Constants;
+import minesweeper.conf.JavaDownloadFileFromURL;
 import minesweeper.interfaces.IGui;
 import minesweeper.objects.Cell;
 import minesweeper.objects.Game;
@@ -45,8 +47,8 @@ public class Gui extends processing.template.Gui implements IGui {
 		// Random r=new Random();
 		Constants.dataString = Gui.Pics[0]; // [6]; //
 
-		Constants.intensity = 60;
-		Gui.setSIZE(80);
+		//Constants.intensity = 20;
+		Gui.setSIZE(90);
 		// System.out.println("hi");
 
 		(new Gui()).run(Gui.mainclass);
@@ -153,7 +155,14 @@ public class Gui extends processing.template.Gui implements IGui {
 				Constants.restart = false;
 				getGame().setRunning(true);
 				setGame(new Game(getGame().getMatch().length, getGame().getMatch()[0].length));
-				IGui.setRandomBombs(getGame());
+				try {
+					getRandomPic();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				//IGui.setRandomBombs(getGame());
+				genMinefieldFromImage();
 				IGui.setSurrBombsAll(getGame());
 				setZoom(1);
 				Constants.xDefault	= 0;
@@ -240,7 +249,7 @@ public class Gui extends processing.template.Gui implements IGui {
 				 * intensity) ){
 				 * Match.getMatch()[i][j].setIsBomb(); }
 				 */
-				if (r == 0 && g == 0 && b == 0) {
+				if (r<120 || g<120|| b<120) {
 					getGame().getMatch()[i][j].setIsBomb();
 				} else {
 					getGame().getMatch()[i][j].setIsNotABomb();
@@ -274,7 +283,7 @@ public class Gui extends processing.template.Gui implements IGui {
 	}
 
 	/**
-	 * Inverso to getXCoordinates
+	 * Inverse to getXCoordinates
 	 *
 	 * @param x x-coordinate
 	 * @return x-position
@@ -343,7 +352,6 @@ public class Gui extends processing.template.Gui implements IGui {
 	@Override
 	public void settings() {
 	}
-
 	/*
 	 * (non-Javadoc)
 	 *
@@ -353,7 +361,7 @@ public class Gui extends processing.template.Gui implements IGui {
 	public void setup() {
 
 		this.background(255);
-		frameRate(24);
+		frameRate(60);
 		surface.setResizable(true);
 		Constants.minefield	= this.loadImage(Constants.dataString);
 		Constants.ratio		= (float) Constants.minefield.height / Constants.minefield.width;
@@ -367,7 +375,7 @@ public class Gui extends processing.template.Gui implements IGui {
 		surface.setLocation(displayWidth - width >> 1, displayHeight - height >> 1);
 		Constants.bomb		= this.loadImage("bomb.png");
 		Constants.minefield	= this.loadImage(Constants.dataString);
-		Constants.minefield.filter(PConstants.THRESHOLD, 0.55f);
+		Constants.minefield.filter(PConstants.THRESHOLD, 0.25f);
 		Constants.Stuck = (int) (0.2 * Constants.CellSize);
 		genMinefieldFromImage();
 		IGui.setSurrBombsAll(getGame());
@@ -413,6 +421,12 @@ public class Gui extends processing.template.Gui implements IGui {
 				}
 			}
 		}
+	}
+	
+	void getRandomPic() throws IOException {
+		JavaDownloadFileFromURL.downloadUsingNIO("http://picsum.photos/g/200/300/?random/?image=0","tmp.jpeg");
+		Constants.minefield	= loadImage("tmp.jpeg");
+		genMinefieldFromImage();
 	}
 
 }
