@@ -43,7 +43,7 @@
 			<artifactId>math</artifactId>
 			<version>1.0.0-snapshot</version>
 			<type>jar</type>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>prcssng</groupId>
