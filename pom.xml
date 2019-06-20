@@ -40,7 +40,7 @@
 		</dependency>
 		<dependency>
 			<groupId>general</groupId>
-			<artifactId>math</artifactId>
+			<artifactId>definitions</artifactId>
 			<version>1.0.0-snapshot</version>
 			<type>jar</type>
 			<scope>provided</scope>
